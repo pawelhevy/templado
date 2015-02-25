@@ -1,0 +1,30 @@
+{% extends 'templado/base_site.html' %}
+{% load bootstrap3 %}
+
+{% block app_content %}
+    {% for template in object_list %}
+        <div class="report-item">
+            <div class="row">
+                <div class="col-sm-12">
+
+                    <div class="buttons">
+                        <div class="upper-btn">
+                            <a class="btn btn-primary btn-sm btn-block"
+                               href="{% url 'edit-template-form' template.id %}">Edit</a>
+                        </div>
+                        <div class="lower-btn">
+                            <a class="btn btn-success btn-sm btn-block" href="{% url 'report-form' template.id %}">Generate</a>
+                        </div>
+                    </div>
+
+                    <div class="report-info">
+                        <p class="report-header">
+                            {{ template.title }}
+                        </p>
+                        {{ template.tags }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

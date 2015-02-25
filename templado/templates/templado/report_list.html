@@ -1,0 +1,41 @@
+{% extends 'templado/base_site.html' %}
+
+{% block app_content %}
+    {% if object_list %}
+        {% for report in object_list|dictsortreversed:'finished' %}
+            <div class="report-item">
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <div class="buttons">
+                            <div class="upper-btn">
+                                <a class="btn btn-primary btn-sm btn-block"
+                                   href="{% url 'edit-report-form' report.id %}">Edit</a>
+                            </div>
+                            <div class="lower-btn">
+                                <a class="btn btn-success btn-sm btn-block"
+
+                                href="{% url 'download-report' report.id %}">Download</a>
+                            </div>
+                        </div>
+
+                        <div class="report-info">
+                            <p class="report-header">
+                                <small class="pull-right report-date">{{ report.finished }}</small>
+                                {{ report.name }}
+                            </p>
+                            {{ report.all_tags }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="row text-content">
+            <div class="col-sm-12">
+                <p>No results</p>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

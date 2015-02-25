@@ -1,0 +1,60 @@
+{% extends 'templado/templado_site.html' %}
+
+{% load staticfiles %}
+{% load search_form %}
+{% load active %}
+
+
+{% block templado_title %}
+    Templado
+{% endblock %}
+
+{% block templado_static %}
+    <link rel="stylesheet" href="{% static 'templado/css/bootstrap.css' %}"/>
+    <link rel="stylesheet" href="{% static 'templado/css/base.css' %}"/>
+    <script src="{% static 'templado/js/jquery.js' %}"></script>
+{% endblock %}
+
+{% block templado_content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="search pull-right">
+                    <form action="{% url 'search' %}" method="get">
+                        {% bootstrap_query_form request %}
+                    </form>
+                </div>
+                <h4 class="templado-header">Templado</h4>
+                <hr/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="nav-header"></li>
+                    <li class="{% is_active request 'template-list' %}">
+                        <a href="{% url 'template-list' %}"><i
+                                class="glyphicon glyphicon-list"></i> Templates</a>
+                    </li>
+                    <li class="{% is_active request 'template-form' %}">
+                        <a href="{% url 'template-form' %}"><i
+                                class="glyphicon glyphicon-wrench"></i> Create Template</a>
+                    </li>
+                    <li class="{% is_active request 'report-list' %}">
+                        <a href="{% url 'report-list' %}"><i
+                                class="glyphicon glyphicon-list-alt"></i> Reports</a>
+                    </li>
+                    <li class="{% is_active request 'help' %}">
+                        <a href="{% url 'help' %}"><i
+                                class="glyphicon glyphicon-question-sign"></i> Help</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-9">
+                {% block app_content %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'templado/base_site.html' %}
+{% load bootstrap3 %}
+
+{% block app_content %}
+    <form enctype="multipart/form-data" action="" method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <input class="btn btn-primary" type="submit" value="Create!"/>
+    </form>
+
+{% endblock %}

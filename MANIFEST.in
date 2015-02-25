@@ -1,0 +1,6 @@
+include LICENSE
+include README.rst
+recursive-include templado/static *
+recursive-include templado/templates *
+recursive-include templado/templatetags *
+recursive-include docs *

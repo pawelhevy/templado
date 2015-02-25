@@ -1,0 +1,120 @@
+body {
+  padding-top: 30px;
+}
+
+.templado-header {
+    padding-left: 10px;
+    font-size: 27px;
+    line-height: 29px;
+    font-family:  Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+.report-item {
+    margin-bottom: 15px;
+    padding: 5px;
+    border: 1px #ddd solid;
+    border-radius: 5px;
+}
+
+.report-header {
+    font-weight: bold;
+    font-size: 20px;
+    display: block;
+    line-height: 1.5;
+    width: 100%;
+    border-bottom: 1px #ccc solid;
+}
+
+.report-date {
+    font-size: 12px;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.buttons {
+    float:left;
+    margin-right: 10px;
+}
+
+.buttons .btn {
+    border-radius: 0;
+}
+
+.upper-btn .btn {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.lower-btn .btn {
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.nested {
+    padding-left: 2em;
+    margin: 3px;
+}
+
+.form {
+    margin-bottom: 20px;
+}
+
+/*.nested .form-control {*/
+    /*width: auto;*/
+    /*display: inline-block;*/
+/*}*/
+
+/*.nested .form-group {*/
+    /*display: inline-block;*/
+/*}*/
+
+/*.nested .control-label {*/
+    /*margin-right: 5px;*/
+/*}*/
+
+.formset {
+    padding-top: 5px;
+}
+
+.search .form-control {
+    border-color: #ccc;
+}
+
+.text-content {
+    text-align: center;
+}
+
+
+.nav > li > a {
+  color:#787878;
+}
+
+footer {
+  margin-top:20px;
+  padding-top:20px;
+  padding-bottom:20px;
+  background-color:#efefef;
+}
+
+/* count indicator near icons */
+.nav>li .count {
+  position: absolute;
+  bottom: 12px;
+  right: 6px;
+  font-size: 9px;
+  background: rgba(51,200,51,0.55);
+  color: rgba(255,255,255,0.9);
+  line-height: 1em;
+  padding: 2px 4px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* indent 2nd level */
+.list-unstyled li > ul > li {
+   margin-left:10px;
+   padding:8px;
+}
