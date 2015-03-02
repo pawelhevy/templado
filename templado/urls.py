@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from views import ReportsListView, TemplatesListView, ReportFormView, DownloadReport, EditReportFormView, \
+from .views import ReportsListView, TemplatesListView, ReportFormView, DownloadReport, EditReportFormView, \
     TemplateFormView, SearchView, HelpView
 
 urlpatterns = patterns('',

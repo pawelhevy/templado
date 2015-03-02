@@ -21,8 +21,8 @@ Description: =====
         
             INSTALLED_APPS = (
                 ...
-                'templado',
                 'bootstrap3',
+                'templado',
             )
         
         2. Modify also settings with::
@@ -41,7 +41,7 @@ Description: =====
         
         3. Include the polls URLconf in your project urls.py like this::
         
-            url(r'^polls/', include('templado.urls')),
+            url(r'^templado/', include('templado.urls', namespace='templado')),
         
         4. Run `python manage.py migrate` to create the templado models.
         

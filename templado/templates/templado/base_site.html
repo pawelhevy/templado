@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="search pull-right">
-                    <form action="{% url 'search' %}" method="get">
+                    <form action="{% url 'templado:search' %}" method="get">
                         {% bootstrap_query_form request %}
                     </form>
                 </div>
@@ -32,20 +32,20 @@
             <div class="col-sm-3">
                 <ul class="nav nav-pills nav-stacked">
                     <li class="nav-header"></li>
-                    <li class="{% is_active request 'template-list' %}">
-                        <a href="{% url 'template-list' %}"><i
+                    <li class="{% is_active request 'templado:template-list' %}">
+                        <a href="{% url 'templado:template-list' %}"><i
                                 class="glyphicon glyphicon-list"></i> Templates</a>
                     </li>
-                    <li class="{% is_active request 'template-form' %}">
-                        <a href="{% url 'template-form' %}"><i
+                    <li class="{% is_active request 'templado:template-form' %}">
+                        <a href="{% url 'templado:template-form' %}"><i
                                 class="glyphicon glyphicon-wrench"></i> Create Template</a>
                     </li>
-                    <li class="{% is_active request 'report-list' %}">
-                        <a href="{% url 'report-list' %}"><i
+                    <li class="{% is_active request 'templado:report-list' %}">
+                        <a href="{% url 'templado:report-list' %}"><i
                                 class="glyphicon glyphicon-list-alt"></i> Reports</a>
                     </li>
-                    <li class="{% is_active request 'help' %}">
-                        <a href="{% url 'help' %}"><i
+                    <li class="{% is_active request 'templado:help' %}">
+                        <a href="{% url 'templado:help' %}"><i
                                 class="glyphicon glyphicon-question-sign"></i> Help</a>
                     </li>
                 </ul>

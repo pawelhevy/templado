@@ -16,15 +16,19 @@ class ReportTemplate(models.Model):
     title_pattern = models.CharField(max_length=128, verbose_name='Pattern for title')
     tags_pattern = models.CharField(max_length=128, verbose_name='Pattern for tags')
 
+    def __unicode__(self):
+        return self.title
+
     def pattern_dict(self):
+        ''' reads json file and returns data structure from it
+        '''
         text = self.pattern.read()
         return json.loads(text)
 
     def get_form(self, *args, **kwargs):
+        ''' returns form object based on json pattern
+        '''
         return FormFromPattern(self.pattern_dict(), True, *args, **kwargs)
-
-    def __unicode__(self):
-        return self.title
 
 
 class ReportManager(models.Manager):
@@ -34,6 +38,8 @@ class ReportManager(models.Manager):
         return report
 
     def create_report(self, template, data, tags=None):
+        ''' creates new report and generates pdf based on data from new report
+        '''
         if isinstance(template, str):
             template = Report.objects.get(pk=template)
         report = self.model(template=template,
@@ -49,6 +55,8 @@ class ReportManager(models.Manager):
         return report
 
     def recreate_report(self, report, data=None, tags=None):
+        ''' changes attributes of report given new data and generates data
+        '''
         report = self.as_obj(report)
         if data:
             report.content = json.dumps(data)
@@ -61,12 +69,17 @@ class ReportManager(models.Manager):
         return report
 
     def tag(self, report, tags):
+        ''' adds new tags for given report
+        '''
         report = self.as_obj(report)
         report.tags += tags
         report.save()
         return report
 
     def all_reports(self, tags=[]):
+        if tags:
+            from django.db.models import Q
+            return self.filter(Q(tags__icontains=tags) | Q(auto_tags__icontains=tags))
         return self.all()
 
 
@@ -89,6 +102,8 @@ class Report(models.Model):
         return self.tags + ', ' + self.auto_tags
 
     def form_content(self):
+        ''' converts its content to format that is accepted by formsets
+        '''
         content = json.loads(self.content)
         flat_content = {}
         for k, v in content.iteritems():
@@ -106,10 +121,14 @@ class Report(models.Model):
         return flat_content
 
     def get_form_with_content(self, data=None, *args, **kwargs):
+        ''' generates form from template and fills it with its formatted content
+        '''
         return self.template.get_form(data) if data \
             else self.template.get_form(self.form_content())
 
     def generate_pdf(self):
+        ''' renders html from file with given context and creates pdf file from it
+        '''
         html_string = Template(self.template.template.read()).render(Context(json.loads(self.content)))
         html = HTML(string=html_string, base_url='')
         filename = self.name.replace('/', '.') + '.pdf'
