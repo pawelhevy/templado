@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Tutorial &mdash; templado 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="templado 1 documentation" href="index.html" />
+    <link rel="prev" title="Installation" href="installation.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="installation.html" title="Installation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">templado 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tutorial">
+<h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
+<p>Sample json file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;hint&quot;</span><span class="p">:</span> <span class="s">&quot;np. 21&quot;</span><span class="p">,</span>
+        <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;text&quot;</span><span class="p">,</span>
+        <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">&quot;check&quot;</span><span class="p">:</span> <span class="s">&quot;^[0-9]+$&quot;</span>
+    <span class="p">},</span>
+    <span class="s">&quot;items&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;caption&quot;</span><span class="p">:</span> <span class="s">&quot;Towary&quot;</span><span class="p">,</span>
+        <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s">&quot;price&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s">&quot;caption&quot;</span><span class="p">:</span> <span class="s">&quot;Cena&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;hint&quot;</span><span class="p">:</span> <span class="s">&quot;np. 21.00&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;text&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;check&quot;</span><span class="p">:</span> <span class="s">&quot;^[0-9]+</span><span class="se">\\</span><span class="s">.[0-9][0-9]$&quot;</span>
+                <span class="p">},</span>
+                <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s">&quot;caption&quot;</span><span class="p">:</span> <span class="s">&quot;Nazwa towaru&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;hint&quot;</span><span class="p">:</span> <span class="s">&quot;np. slodka bulka&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;text&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;check&quot;</span><span class="p">:</span> <span class="s">&quot;.+&quot;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Sample html file:</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;body&gt;
+        &lt;h1&gt;Rachunek nr {{id}}&lt;/h1&gt;
+        &lt;table&gt;
+        {% for a in items %}
+        &lt;tr&gt;
+                &lt;td&gt;{{ a.name }}&lt;/td&gt;
+                &lt;td&gt;{{ a.price }}&lt;/td&gt;
+        &lt;/tr&gt;
+        {% endfor %}
+        &lt;/table&gt;
+    &lt;table&gt;
+        {% for b in elements %}
+        &lt;tr&gt;
+                &lt;td&gt;{{ b.name }}&lt;/td&gt;
+                &lt;td&gt;{{ b.price }}&lt;/td&gt;
+        &lt;/tr&gt;
+        {% endfor %}
+    &lt;/table&gt;
+&lt;/body&gt;
+</pre></div>
+</div>
+<p>Your own template html for templado app:</p>
+<div class="highlight-python"><div class="highlight"><pre>{% extends &#39;base.html&#39; %}
+
+{% block title %}
+    {% block templado_title %}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    {% block templado_static %}
+    {% endblock %}
+
+    {% block templado_content %}
+    {% endblock %}
+{% endblock %}
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="installation.html"
+                        title="previous chapter">Installation</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/tutorial.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Anna Kups.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.2</a>
+      
+      |
+      <a href="_sources/tutorial.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>
