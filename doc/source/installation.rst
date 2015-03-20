@@ -9,7 +9,7 @@ Here are some steps to make templado app working.
 
 	``pip install templado``
 
-#. Put bootstrap3 in your settings.py::
+#. Put **bootstrap3** and **templado** in your *settings.py*::
 
 	INSTALLED_APPS = (
 	    ...
@@ -17,7 +17,7 @@ Here are some steps to make templado app working.
 	    'templado',
 	)
 
-#. Modify also settings with::
+#. Modify also *settings.py* with::
 
 	FILE_UPLOAD_HANDLERS = (
 	    ...
@@ -31,7 +31,7 @@ Here are some steps to make templado app working.
 	    'django.core.context_processors.request',
 	)
 
-#. Include the templado URLconf in your project urls.py like this::
+#. Include the templado URLconf in your project *urls.py* like this::
 
 	url(r'^templado/', include('templado.urls', namespace='templado'))
 

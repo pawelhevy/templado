@@ -5,6 +5,7 @@ Sample json file::
 
 	{
 	    "id": {
+        	"caption": "Numer faktury",
 	        "hint": "np. 21",
 	        "type": "text",
 	        "order": 1,

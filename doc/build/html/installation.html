@@ -63,7 +63,7 @@
 <div><p><code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">templado</span></code></p>
 </div></blockquote>
 </li>
-<li><p class="first">Put bootstrap3 in your settings.py:</p>
+<li><p class="first">Put <strong>bootstrap3</strong> and <strong>templado</strong> in your <em>settings.py</em>:</p>
 <div class="highlight-python"><div class="highlight"><pre>INSTALLED_APPS = (
     ...
     &#39;bootstrap3&#39;,
@@ -72,7 +72,7 @@
 </pre></div>
 </div>
 </li>
-<li><p class="first">Modify also settings with:</p>
+<li><p class="first">Modify also <em>settings.py</em> with:</p>
 <div class="highlight-python"><div class="highlight"><pre>FILE_UPLOAD_HANDLERS = (
     ...
     &#39;django.core.files.uploadhandler.MemoryFileUploadHandler&#39;,
@@ -87,7 +87,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 </pre></div>
 </div>
 </li>
-<li><p class="first">Include the templado URLconf in your project urls.py like this:</p>
+<li><p class="first">Include the templado URLconf in your project <em>urls.py</em> like this:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">url</span><span class="p">(</span><span class="s">r&#39;^templado/&#39;</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">&#39;templado.urls&#39;</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s">&#39;templado&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
