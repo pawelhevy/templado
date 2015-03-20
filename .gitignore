@@ -2,3 +2,4 @@
 *~
 .pypirc
 dist/
+templado.egg-info/
