@@ -24,6 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="templado 1 documentation" href="index.html" />
+    <link rel="next" title="Using in your browser" href="using in browser.html" />
     <link rel="prev" title="Installation" href="installation.html" />
    
   
@@ -38,6 +39,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="using in browser.html" title="Using in your browser"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="installation.html" title="Installation"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">templado 1 documentation</a> &raquo;</li> 
@@ -51,78 +55,12 @@
             
   <div class="section" id="tutorial">
 <h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
-<p>Sample json file:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
-    <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s">&quot;caption&quot;</span><span class="p">:</span> <span class="s">&quot;Numer faktury&quot;</span><span class="p">,</span>
-        <span class="s">&quot;hint&quot;</span><span class="p">:</span> <span class="s">&quot;np. 21&quot;</span><span class="p">,</span>
-        <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;text&quot;</span><span class="p">,</span>
-        <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="s">&quot;check&quot;</span><span class="p">:</span> <span class="s">&quot;^[0-9]+$&quot;</span>
-    <span class="p">},</span>
-    <span class="s">&quot;items&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s">&quot;caption&quot;</span><span class="p">:</span> <span class="s">&quot;Towary&quot;</span><span class="p">,</span>
-        <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-        <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="p">{</span>
-                <span class="s">&quot;price&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s">&quot;caption&quot;</span><span class="p">:</span> <span class="s">&quot;Cena&quot;</span><span class="p">,</span>
-                    <span class="s">&quot;hint&quot;</span><span class="p">:</span> <span class="s">&quot;np. 21.00&quot;</span><span class="p">,</span>
-                    <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;text&quot;</span><span class="p">,</span>
-                    <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-                    <span class="s">&quot;check&quot;</span><span class="p">:</span> <span class="s">&quot;^[0-9]+</span><span class="se">\\</span><span class="s">.[0-9][0-9]$&quot;</span>
-                <span class="p">},</span>
-                <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="p">{</span>
-                    <span class="s">&quot;caption&quot;</span><span class="p">:</span> <span class="s">&quot;Nazwa towaru&quot;</span><span class="p">,</span>
-                    <span class="s">&quot;hint&quot;</span><span class="p">:</span> <span class="s">&quot;np. slodka bulka&quot;</span><span class="p">,</span>
-                    <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;text&quot;</span><span class="p">,</span>
-                    <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-                    <span class="s">&quot;check&quot;</span><span class="p">:</span> <span class="s">&quot;.+&quot;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Sample html file:</p>
-<div class="highlight-python"><div class="highlight"><pre>&lt;body&gt;
-        &lt;h1&gt;Rachunek nr {{id}}&lt;/h1&gt;
-        &lt;table&gt;
-        {% for a in items %}
-        &lt;tr&gt;
-                &lt;td&gt;{{ a.name }}&lt;/td&gt;
-                &lt;td&gt;{{ a.price }}&lt;/td&gt;
-        &lt;/tr&gt;
-        {% endfor %}
-        &lt;/table&gt;
-    &lt;table&gt;
-        {% for b in elements %}
-        &lt;tr&gt;
-                &lt;td&gt;{{ b.name }}&lt;/td&gt;
-                &lt;td&gt;{{ b.price }}&lt;/td&gt;
-        &lt;/tr&gt;
-        {% endfor %}
-    &lt;/table&gt;
-&lt;/body&gt;
-</pre></div>
-</div>
-<p>Your own template html for templado app:</p>
-<div class="highlight-python"><div class="highlight"><pre>{% extends &#39;base.html&#39; %}
-
-{% block title %}
-    {% block templado_title %}
-    {% endblock %}
-{% endblock %}
-
-{% block content %}
-    {% block templado_static %}
-    {% endblock %}
-
-    {% block templado_content %}
-    {% endblock %}
-{% endblock %}
-</pre></div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="using in browser.html">Using in your browser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changing html.html">Changing look of application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using in code.html">Using in your code</a></li>
+</ul>
 </div>
 </div>
 
@@ -135,6 +73,9 @@
   <h4>Previous topic</h4>
   <p class="topless"><a href="installation.html"
                         title="previous chapter">Installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="using in browser.html"
+                        title="next chapter">Using in your browser</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">

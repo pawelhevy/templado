@@ -1,0 +1,236 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Using in your browser &mdash; templado 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="templado 1 documentation" href="index.html" />
+    <link rel="up" title="Tutorial" href="tutorial.html" />
+    <link rel="next" title="Changing look of application" href="changing html.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="changing html.html" title="Changing look of application"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tutorial.html" title="Tutorial"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">templado 1 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="tutorial.html" accesskey="U">Tutorial</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="using-in-your-browser">
+<h1>Using in your browser<a class="headerlink" href="#using-in-your-browser" title="Permalink to this headline">¶</a></h1>
+<p>Here&#8217;s sample walktrough how to create templates of reports and use them.</p>
+<ol class="arabic">
+<li><p class="first">Go to url with <em>Templado</em> app, there is almost no content, because you haven&#8217;t created your templates yet. Let&#8217;s do this! Click on <code class="docutils literal"><span class="pre">Create</span> <span class="pre">Template</span></code> on the sidebar.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Now I will explain you the meaning of fields of form:</dt>
+<dd><ul class="first">
+<li><p class="first"><code class="docutils literal"><span class="pre">Title</span> <span class="pre">of</span> <span class="pre">template</span></code> - you can name it how you want, e.g. &#8220;Pro forma invoice&#8221;</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">JSON</span> <span class="pre">template</span> <span class="pre">file</span></code> - here you upload json pattern of form for creating new report. I will show you sample file:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s">&quot;id&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;caption&quot;</span><span class="p">:</span> <span class="s">&quot;Report ID&quot;</span><span class="p">,</span>
+        <span class="s">&quot;hint&quot;</span><span class="p">:</span> <span class="s">&quot;some number e.g. 21&quot;</span><span class="p">,</span>
+        <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;text&quot;</span><span class="p">,</span>
+        <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">&quot;check&quot;</span><span class="p">:</span> <span class="s">&quot;^[0-9]+$&quot;</span>
+    <span class="p">},</span>
+    <span class="s">&quot;year&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;caption&quot;</span><span class="p">:</span> <span class="s">&quot;Year&quot;</span><span class="p">,</span>
+        <span class="s">&quot;hint&quot;</span><span class="p">:</span> <span class="s">&quot;YYYY&quot;</span><span class="p">,</span>
+        <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;text&quot;</span><span class="p">,</span>
+        <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s">&quot;check&quot;</span><span class="p">:</span> <span class="s">&quot;^[0-9][0-9][0-9][0-9]$&quot;</span>
+        <span class="p">},</span>
+    <span class="s">&quot;items&quot;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">&quot;caption&quot;</span><span class="p">:</span> <span class="s">&quot;Bought products&quot;</span><span class="p">,</span>
+        <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s">&quot;price&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s">&quot;caption&quot;</span><span class="p">:</span> <span class="s">&quot;Price&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;hint&quot;</span><span class="p">:</span> <span class="s">&quot;e.g. 21.00&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;text&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="s">&quot;check&quot;</span><span class="p">:</span> <span class="s">&quot;^[0-9]+</span><span class="se">\\</span><span class="s">.[0-9][0-9]$&quot;</span>
+                <span class="p">},</span>
+                <span class="s">&quot;name&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s">&quot;caption&quot;</span><span class="p">:</span> <span class="s">&quot;Name of product&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;hint&quot;</span><span class="p">:</span> <span class="s">&quot;e.g. printer ink&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;type&quot;</span><span class="p">:</span> <span class="s">&quot;text&quot;</span><span class="p">,</span>
+                    <span class="s">&quot;order&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="s">&quot;check&quot;</span><span class="p">:</span> <span class="s">&quot;.+&quot;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>As you can see, we declare what fields we want to show: <strong>&#8220;id&#8221;</strong>, <strong>&#8220;year&#8221;</strong> and <strong>&#8220;items&#8221;</strong>. Let&#8217;s look on it!
+It has:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt><strong>&#8220;caption&#8221;</strong></dt>
+<dd><p class="first last">represents what will show as label</p>
+</dd>
+<dt><strong>&#8220;hint&#8221;</strong></dt>
+<dd><p class="first last">placeholder for input</p>
+</dd>
+<dt><strong>&#8220;type&#8221;</strong></dt>
+<dd><p class="first last">based on the type of value we declare type of input, for string - text input, for list with dict - nested formset which can have several text inputs, only root form can have those</p>
+</dd>
+<dt><strong>&#8220;order&#8221;</strong></dt>
+<dd><p class="first last">number for ordering fields, because form pattern is represented as dict</p>
+</dd>
+<dt><strong>&#8220;check&#8221;</strong></dt>
+<dd><p class="first last">regular expression for validating input from user</p>
+</dd>
+</dl>
+</div></blockquote>
+<ul>
+<li><p class="first"><code class="docutils literal"><span class="pre">HTML</span> <span class="pre">template</span> <span class="pre">file</span></code> - the file can be like this:</p>
+<div class="highlight-python"><div class="highlight"><pre>&lt;html&gt;
+&lt;head&gt;
+        &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+        &lt;h1&gt;Invoice no. {{ id }}&lt;/h1&gt;
+        &lt;table&gt;
+                {% for element in items %}
+                        &lt;tr&gt;
+                                &lt;td&gt;{{ element.name }}&lt;/td&gt;
+                                &lt;td&gt;{{ element.price }}&lt;/td&gt;
+                        &lt;/tr&gt;
+                {% endfor %}
+        &lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Here we specify how our pdf with report should look like. It will be filled with data user gives to the input in form. We&#8217;re using names from json file: <code class="docutils literal"><span class="pre">id</span></code> and <code class="docutils literal"><span class="pre">items</span></code>, and because <code class="docutils literal"><span class="pre">items</span></code> is formset it can have several entries. Each of them has <code class="docutils literal"><span class="pre">name</span></code> and <code class="docutils literal"><span class="pre">price</span></code>, so we can iterate over it.</p>
+<ul class="last">
+<li><p class="first"><code class="docutils literal"><span class="pre">Tags</span></code> - some keywords separated with comma</p>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">Pattern</span> <span class="pre">for</span> <span class="pre">title</span></code> - it will show as title of report based on data from form, also uses Django template language e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">PFI</span><span class="o">/</span><span class="p">{{</span> <span class="nb">id</span> <span class="p">}}</span><span class="o">/</span><span class="p">{{</span> <span class="n">year</span> <span class="p">}}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><code class="docutils literal"><span class="pre">Pattern</span> <span class="pre">for</span> <span class="pre">tags</span></code> - your keywords, so it will be easier to find some specific report, e.g.:</p>
+<div class="highlight-python"><div class="highlight"><pre>year: {{ year }}
+</pre></div>
+</div>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Make sure you filled all fields and click <code class="docutils literal"><span class="pre">Create!</span></code> It will redirect you to view <code class="docutils literal"><span class="pre">Templates</span></code> and create new report template from which you can generate new reports.</p>
+</li>
+<li><p class="first">Now you can create new report from template. To do this click <code class="docutils literal"><span class="pre">Generate</span></code>.</p>
+</li>
+<li><p class="first">There you have form, it has labels, captions, validations as we declared earlier in json pattern. Fill it as you like (in formset you can add new elements) and click <code class="docutils literal"><span class="pre">Generate</span> <span class="pre">PDF</span></code>.</p>
+</li>
+<li><p class="first">Finish! New report is created, click <code class="docutils literal"><span class="pre">Download</span></code> to see PDF based on html pattern we uploaded a few steps back and data we entered into form.</p>
+</li>
+</ol>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tutorial.html"
+                        title="previous chapter">Tutorial</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="changing html.html"
+                        title="next chapter">Changing look of application</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/using in browser.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Anna Kups.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.2</a>
+      
+      |
+      <a href="_sources/using in browser.txt"
+          rel="nofollow">Page source</a></li>
+    </div>
+
+    
+
+    
+  </body>
+</html>
