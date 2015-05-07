@@ -30,6 +30,8 @@ Here are some steps to make templado app working.
 	    'django.contrib.auth.context_processors.auth',
 	    'django.core.context_processors.request',
 	)
+	
+	REPORT_STATIC_DIR = os.path.join(os.path.join(settings.MEDIA_ROOT, 'media'), 'report-static')
 
 #. Include the templado URLconf in your project *urls.py* like this::
 

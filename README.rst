@@ -31,7 +31,10 @@ Quick start
         'django.core.context_processors.request',
     )
 
-3. Include the polls URLconf in your project urls.py like this::
+    from django.conf import settings
+    REPORT_STATIC_DIR = os.path.join(os.path.join(settings.MEDIA_ROOT, 'media'), 'report-static')
+
+3. Include the templado URLconf in your project urls.py like this::
 
     url(r'^templado/', include('templado.urls', namespace='templado')),
 
