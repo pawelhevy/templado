@@ -1,5 +1,4 @@
 *.pyc
 *~
 .pypirc
-dist/
 templado.egg-info/

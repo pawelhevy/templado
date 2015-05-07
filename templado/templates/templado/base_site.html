@@ -36,6 +36,10 @@
                         <a href="{% url 'templado:template-list' %}"><i
                                 class="glyphicon glyphicon-list"></i> Templates</a>
                     </li>
+                    <li class="{% is_active request 'templado:upload-static' %}">
+                        <a href="{% url 'templado:upload-static' %}"><i
+                                class="glyphicon glyphicon-picture"></i> Upload Static Files</a>
+                    </li>
                     <li class="{% is_active request 'templado:template-form' %}">
                         <a href="{% url 'templado:template-form' %}"><i
                                 class="glyphicon glyphicon-wrench"></i> Create Template</a>

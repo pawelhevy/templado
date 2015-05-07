@@ -40,6 +40,8 @@ class ReportManager(models.Manager):
     def create_report(self, template, data, tags=None):
         ''' creates new report and generates pdf based on data from new report
         '''
+        if isinstance(template, int):
+            template = str(template)
         if isinstance(template, str):
             template = Report.objects.get(pk=template)
         report = self.model(template=template,

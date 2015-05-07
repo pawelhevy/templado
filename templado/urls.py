@@ -1,8 +1,9 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 from .views import ReportsListView, TemplatesListView, ReportFormView, DownloadReport, EditReportFormView, \
-    TemplateFormView, SearchView, HelpView
+    TemplateFormView, SearchView, HelpView, UploadStaticView
 
 urlpatterns = patterns('',
+    url(r'^uploadstatic/$', UploadStaticView.as_view(), name='upload-static'),
     url(r'^create/$', TemplateFormView.as_view(), name='template-form'),
     url(r'^search/$', SearchView.as_view(), name='search'),
     url(r'^edit/(?P<template>\d+)/$', TemplateFormView.as_view(), name='edit-template-form'),

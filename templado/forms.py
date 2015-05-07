@@ -1,31 +1,29 @@
 from functools import wraps, partial
 from django.core.validators import RegexValidator
-from django.forms import Form, Field, CharField, TextInput
+from django.forms import Form, Field, CharField, TextInput, FileField
 from collections import OrderedDict
 from django.forms.formsets import formset_factory
 
 
-class ObjectField(Field):
-    default_error_messages = {
-        'unknown type': 'this type of object won\'t be used',
-    }
+class UploadStaticForm(Form):
+    file = FileField()
 
 
 class FormFromPattern(Form):
-
     def create_fields(self, pattern, *args, **kwargs):
         for key, value in pattern.iteritems():
             if isinstance(value['type'], unicode) or isinstance(value['type'], str):
                 self.fields[key] = CharField(required=True, label=value['caption'],
                                              widget=TextInput(attrs={'placeholder': value['hint'],
-                                                                     }),
+                                             }),
                                              validators=[RegexValidator(value['check'], 'Wrong format')])
             elif isinstance(value['type'], list):  # formset
-                FormFromPatternFormSet = formset_factory(wraps(FormFromPattern)(partial(FormFromPattern, pattern=value['type'][0], tags=False)),
-                                                         extra=1, can_delete=True)
+                FormFromPatternFormSet = formset_factory(
+                    wraps(FormFromPattern)(partial(FormFromPattern, pattern=value['type'][0], tags=False)),
+                    extra=1, can_delete=True)
                 self.nested_formsets.append({'caption': value['caption'],
-                                            'name': key,
-                                            'formset': FormFromPatternFormSet(prefix=key, *args, **kwargs)})
+                                             'name': key,
+                                             'formset': FormFromPatternFormSet(prefix=key, *args, **kwargs)})
 
     def __init__(self, pattern, tags, *args, **kwargs):
         super(FormFromPattern, self).__init__(*args, **kwargs)
@@ -35,7 +33,7 @@ class FormFromPattern(Form):
         if tags:
             self.fields['tags'] = CharField(required=False, label='Tags',
                                             widget=TextInput(attrs={'placeholder': 'Tags separated with comma',
-                                                                    }),)
+                                            }), )
 
     def is_valid(self):
         form_is_valid = super(FormFromPattern, self).is_valid()
