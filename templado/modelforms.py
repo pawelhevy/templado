@@ -8,6 +8,7 @@ class ReportTemplateForm(ModelForm):
 
     class Meta:
         model = ReportTemplate
+        fields = "__all__" 
 
     def clean_pattern(self):
         data = self.cleaned_data.get('pattern')
