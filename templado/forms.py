@@ -12,18 +12,19 @@ class UploadStaticForm(Form):
 class FormFromPattern(Form):
     def create_fields(self, pattern, *args, **kwargs):
         for key, value in pattern.iteritems():
-            if isinstance(value['type'], unicode) or isinstance(value['type'], str):
-                self.fields[key] = CharField(required=True, label=value['caption'],
-                                             widget=TextInput(attrs={'placeholder': value['hint'],
-                                             }),
-                                             validators=[RegexValidator(value['check'], 'Wrong format')])
-            elif isinstance(value['type'], list):  # formset
-                FormFromPatternFormSet = formset_factory(
-                    wraps(FormFromPattern)(partial(FormFromPattern, pattern=value['type'][0], tags=False)),
-                    extra=1, can_delete=True)
-                self.nested_formsets.append({'caption': value['caption'],
-                                             'name': key,
-                                             'formset': FormFromPatternFormSet(prefix=key, *args, **kwargs)})
+            if key != 'STATIC_DIR':
+                if isinstance(value['type'], unicode) or isinstance(value['type'], str):
+                    self.fields[key] = CharField(required=True, label=value['caption'],
+                                                 widget=TextInput(attrs={'placeholder': value['hint'],
+                                                 }),
+                                                 validators=[RegexValidator(value['check'], 'Wrong format')])
+                elif isinstance(value['type'], list):  # formset
+                    FormFromPatternFormSet = formset_factory(
+                        wraps(FormFromPattern)(partial(FormFromPattern, pattern=value['type'][0], tags=False)),
+                        extra=1, can_delete=True)
+                    self.nested_formsets.append({'caption': value['caption'],
+                                                 'name': key,
+                                                 'formset': FormFromPatternFormSet(prefix=key, *args, **kwargs)})
 
     def __init__(self, pattern, tags, *args, **kwargs):
         super(FormFromPattern, self).__init__(*args, **kwargs)

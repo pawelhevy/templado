@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='templado',
-    version='0.2',
+    version='0.5.3',
     packages=['templado'],
     include_package_data=True,
     license='BSD License',  # example license
@@ -33,7 +33,7 @@ setup(
         'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
     ],
     install_requires=[
-	'Django',
+	'Django == 1.7',
         'CairoSVG',
         'Pyphen', 
         'WeasyPrint',

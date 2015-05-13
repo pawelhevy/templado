@@ -3,6 +3,7 @@ import json
 from django.core.files.base import ContentFile
 from django.db import models
 from django.template import Template, Context
+from django.conf import settings
 from django.utils import timezone
 from weasyprint import HTML
 from .forms import FormFromPattern
@@ -37,9 +38,10 @@ class ReportManager(models.Manager):
             report = self.get(pk=report)
         return report
 
-    def create_report(self, template, data, tags=None):
+    def create_report(self, template, data, tags=''):
         ''' creates new report and generates pdf based on data from new report
         '''
+        data.update({'STATIC_DIR': settings.REPORT_STATIC_DIR})
         if isinstance(template, int):
             template = str(template)
         if isinstance(template, str):
@@ -48,7 +50,7 @@ class ReportManager(models.Manager):
                             name=Template(template.title_pattern).render(Context(data)),
                             content=json.dumps(data),
                             auto_tags=Template(template.tags_pattern).render(Context(data)),
-                            tags=tags,
+                            tags=' '.join(tags.split()),
                             )
         report.started = timezone.now()
         report.generate_pdf()
@@ -56,11 +58,12 @@ class ReportManager(models.Manager):
         report.save()
         return report
 
-    def recreate_report(self, report, data=None, tags=None):
+    def recreate_report(self, report, data=None, tags=''):
         ''' changes attributes of report given new data and generates data
         '''
         report = self.as_obj(report)
         if data:
+            data.update(data)
             report.content = json.dumps(data)
             report.name = Template(report.template.title_pattern).render(Context(data))
             report.auto_tags = Template(report.template.tags_pattern).render(Context(data))
@@ -74,11 +77,12 @@ class ReportManager(models.Manager):
         ''' adds new tags for given report
         '''
         report = self.as_obj(report)
-        report.tags += tags
+        all_tags = ' '.join(report.tags.split() + tags.split())
+        report.tags = all_tags
         report.save()
         return report
 
-    def all_reports(self, tags=[]):
+    def all_reports(self, tags=''):
         if tags:
             from django.db.models import Q
             return self.filter(Q(tags__icontains=tags) | Q(auto_tags__icontains=tags))
