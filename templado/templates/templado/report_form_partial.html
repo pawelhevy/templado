@@ -1,0 +1,60 @@
+{% load bootstrap3 %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div>
+        {% bootstrap_form form %}
+    </div>
+    {% if form.nested_formsets %}
+        {% for nested_formset in form.nested_formsets %}
+            <script type="text/html" id="{{ nested_formset.name }}-template">
+                <div class="{{ nested_formset.name }}-item formset">
+                    <div class="row">
+                        {% for field in nested_formset.formset.empty_form %}
+                            <div class="col-sm-4">
+                                {% bootstrap_field field %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </script>
+            <div class="form-group">
+                <p><strong>{{ nested_formset.caption }}:</strong></p>
+
+                <div class="nested" id="{{ nested_formset.name }}-formset">
+                    {{ nested_formset.formset.management_form }}
+                    {% for nested_form in nested_formset.formset %}
+                        <div class="{{ nested_formset.name }}-item formset">
+                            <div class="row">
+                                {% for field in nested_form %}
+                                    <div class="col-sm-4">
+                                        {% bootstrap_field field %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <a href="#" class="btn btn-default btn-sm add-form"
+                   id="{{ nested_formset.name }}">Add {{ nested_formset.name }} {% bootstrap_icon "plus" %}</a>
+
+            </div>
+        {% endfor %}
+    {% endif %}
+    <p>
+        <input type="submit" class="btn btn-primary" value="Generate PDF"/>
+    </p>
+</form>
+
+<script>
+    $('.add-form').click(function (ev) {
+        ev.preventDefault();
+        var name = $(this).attr('id');
+        var count = $('.' + name + '-item').length;
+        var tmplMarkup = $('#' + name + '-template').html();
+        tmplMarkup = tmplMarkup.replace(/__prefix__/g, count);
+        var formset = $('#' + name + '-formset');
+        formset.append(tmplMarkup);
+        $('#id_' + name + '-TOTAL_FORMS').attr('value', count + 1);
+    });
+</script>

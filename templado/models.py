@@ -58,9 +58,10 @@ class ReportManager(models.Manager):
         report.save()
         return report
 
-    def recreate_report(self, report, data=None, tags=''):
+    def recreate_report(self, report, data={}, tags=''):
         ''' changes attributes of report given new data and generates data
         '''
+        data.update({'STATIC_DIR': settings.REPORT_STATIC_DIR})
         report = self.as_obj(report)
         if data:
             data.update(data)
@@ -105,7 +106,7 @@ class Report(models.Model):
 
     @property
     def all_tags(self):
-        return self.tags + ', ' + self.auto_tags
+        return ' '.join(self.tags.split() + self.auto_tags.split())
 
     def form_content(self):
         ''' converts its content to format that is accepted by formsets
