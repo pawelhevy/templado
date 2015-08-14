@@ -1,0 +1,15 @@
+Django == 1.7
+CairoSVG
+Pyphen
+WeasyPrint
+argparse
+cairocffi
+cffi
+cssselect
+django-bootstrap3
+html5lib
+lxml
+pycparser
+six
+tinycss
+wsgiref
