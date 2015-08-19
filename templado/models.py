@@ -1,18 +1,45 @@
 from io import BytesIO
 import json
 from django.core.files.base import ContentFile
-from django.db import models
 from django.template import Template, Context
 from django.conf import settings
 from django.utils import timezone
 from weasyprint import HTML
 from .forms import FormFromPattern
 
+from django.db import models
+from django.forms.widgets import ClearableFileInput,CheckboxInput
+from django.forms import forms
+from django.utils.safestring import mark_safe
+from django.utils.html import conditional_escape
+
+class ClearableFileInputWithRestrictAccess(ClearableFileInput):
+    def get_template_substitution_values(self, value):
+        #ten print
+        print 'ClearableFileInputWithRestrictAccess.get_template_substitution_values [%s%%]\r'%value['initial_url']
+        return {
+            'initial': conditional_escape(value),
+            'initial_url': 'alaMaKota',
+        }
+
+class FormsFileFieldWithRestrictAccess(forms.FileField):
+    widget = ClearableFileInputWithRestrictAccess
+
+class FileFieldWithRestrictAccess(models.FileField):
+    def __init__(self, verbose_name=None, name=None, upload_to='', storage=None, **kwargs):
+        return super(FileFieldWithRestrictAccess, self).__init__(verbose_name, name, upload_to, storage, **kwargs)
+
+    def formfield(self, **kwargs):
+        kwargs.update({'form_class': FormsFileFieldWithRestrictAccess})
+        print 'FileFieldWithRestrictAccess.formfield [%s%%]\r'%kwargs.get('form_class')
+        return super(models.FileField, self).formfield(**kwargs)
+
+
 
 class ReportTemplate(models.Model):
     title = models.CharField(unique=True, max_length=64, verbose_name='Title of template')
-    template = models.FileField(verbose_name='HTML template file', upload_to='media/report-templates')
-    pattern = models.FileField(verbose_name='JSON pattern file', upload_to='media/report-templates')
+    template = FileFieldWithRestrictAccess(verbose_name='HTML template file', upload_to='media/report-templates') #nadpisac klase
+    pattern = FileFieldWithRestrictAccess(verbose_name='JSON pattern file', upload_to='media/report-templates')
     tags = models.CharField(max_length=256, verbose_name='Tags')
     title_pattern = models.CharField(max_length=128, verbose_name='Pattern for title')
     tags_pattern = models.CharField(max_length=128, verbose_name='Pattern for tags')
@@ -144,5 +171,3 @@ class Report(models.Model):
         pdf = buffer.getvalue()
         buffer.close()
         self.file.save(filename, ContentFile(pdf))
-
-
