@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from .views import ReportsListView, TemplatesListView, ReportFormView, DownloadReport, EditReportFormView, \
+from .views import ReportsListView, TemplatesListView, ReportFormView, DownloadReport, DownloadMedia, EditReportFormView, \
     TemplateFormView, SearchView, HelpView, UploadStaticView
 
 urlpatterns = patterns('',
@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^regenerate/(?P<report>\d+)/$', EditReportFormView.as_view(), name='edit-report-form'),
     url(r'^reports$', ReportsListView.as_view(), name='report-list'),
     url(r'^download/(?P<report>\d+)/$', DownloadReport.as_view(), name='download-report'),
+    url(r'^download/media/(?P<folder>[a-zA-Z0-9_-]+)/(?P<filename>[a-zA-Z0-9_-]+)/$', DownloadMedia.as_view(), name='download-media'),
     url(r'^help$', HelpView.as_view(), name='help'),
     url(r'^$', TemplatesListView.as_view(), name='template-list'),
 )

@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from django.views.generic.list import ListView
+from django.core.servers.basehttp import FileWrapper
 import errno
 from models import Report, ReportTemplate
 from .modelforms import ReportTemplateForm
@@ -124,6 +125,17 @@ class DownloadReport(View):
         response['Content-Disposition'] = 'inline; filename=%s' % filename
         return response
 
+class DownloadMedia(View):
+
+    def get(self, request, *args, **kwargs):
+        filename = kwargs['filename']
+        fileFolder = kwargs['folder']
+        url = settings.MEDIA_ROOT + "media/"+fileFolder+"/"+filename
+        wrapper = FileWrapper(file(url))
+        response = HttpResponse(wrapper, content_type='text/plain')
+        response['Content-Disposition'] = 'attachment; filename=%s' % os.path.basename(filename)
+        response['Content-Length'] = os.path.getsize(url)
+        return response
 
 class TemplateFormView(View):
     """
