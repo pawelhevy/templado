@@ -32,7 +32,11 @@ Quick start
     )
 
     from django.conf import settings
-    REPORT_STATIC_DIR = os.path.join(os.path.join(settings.MEDIA_ROOT, 'media'), 'report-static')
+#set different media folder
+#MEDIA_URL = 'custom_media_folder/' 
+TEMPLADO_REPORT_STATIC_DIR = os.path.join(settings.MEDIA_URL, 'report-static')
+TEMPLADO_REPORT_TEMPLATE_DIR = os.path.join(settings.MEDIA_URL, 'report-templates')
+TEMPLADO_REPORT_FILES_DIR = os.path.join(settings.MEDIA_URL, 'report-files') 'media'), 'report-static')
 
 3. Include the templado URLconf in your project urls.py like this::
 

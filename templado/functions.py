@@ -4,12 +4,13 @@ from django.conf import settings
 
 
 def get_static_directory():
-    directory = settings.REPORT_STATIC_DIR
+    directory = settings.TEMPLADO_REPORT_STATIC_DIR
     try:
         os.makedirs(directory)
     except OSError as exception:
         if exception.errno != errno.EEXIST:
             raise
+    print(directory)
     return directory
 
 

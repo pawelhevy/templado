@@ -125,15 +125,14 @@ class DownloadReport(View):
         response['Content-Disposition'] = 'inline; filename=%s' % filename
         return response
 
-class DownloadMedia(View):
+class DownloadTemplate(View):
 
     def get(self, request, *args, **kwargs):
-        filename = kwargs['filename']
-        fileFolder = kwargs['folder']
-        url = settings.MEDIA_ROOT + "media/"+fileFolder+"/"+filename
+        fileName = kwargs['filename']
+        url = os.path.join(settings.TEMPLADO_REPORT_TEMPLATE_DIR, fileName)
         wrapper = FileWrapper(file(url))
         response = HttpResponse(wrapper, content_type='text/plain')
-        response['Content-Disposition'] = 'attachment; filename=%s' % os.path.basename(filename)
+        response['Content-Disposition'] = 'attachment; filename=%s' % os.path.basename(fileName)
         response['Content-Length'] = os.path.getsize(url)
         return response
 
