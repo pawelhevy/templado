@@ -31,7 +31,14 @@ Here are some steps to make templado app working.
 	    'django.core.context_processors.request',
 	)
 	
-	REPORT_STATIC_DIR = os.path.join(os.path.join(settings.MEDIA_ROOT, 'media'), 'report-static')
+	'''
+    	set root folder on disk where files will be uploaded
+    	MEDIA_ROOT = '/media/DjangoApp/'
+	'''
+	TEMPLADO_REPORT_STATIC_DIR   = 'templado/static'
+	TEMPLADO_REPORT_TEMPLATE_DIR = 'templado/templates'
+	TEMPLADO_REPORT_FILES_DIR    = 'templado/reports'
+	# with this config the files will go to {MEDIA_ROOT}/templado
 
 #. Include the templado URLconf in your project *urls.py* like this::
 
