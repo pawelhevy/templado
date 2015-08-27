@@ -9,13 +9,14 @@ from django.forms.widgets import ClearableFileInput,CheckboxInput
 from django.forms import forms
 from weasyprint import HTML
 from .forms import FormFromPattern
+from templado import functions
 
 
 class ClearableFileInputWithRestrictAccess(ClearableFileInput):
     """
     Wrapper for standard ClearableFileInput. Sets new markup template to download previously uploaded file as a view
     """
-    url_markup_template = '<a href="/templado/download/{0}">Download</a>'
+    url_markup_template = '<a href="/templado/download{0}">Download</a>'
 
 class FormsFileFieldWithRestrictAccess(forms.FileField):
     """
@@ -33,8 +34,8 @@ class FileFieldWithRestrictAccess(models.FileField):
 
 class ReportTemplate(models.Model):
     title = models.CharField(unique=True, max_length=64, verbose_name='Title of template')
-    template = FileFieldWithRestrictAccess(verbose_name='HTML template file', upload_to=settings.TEMPLADO_REPORT_TEMPLATE_DIR)
-    pattern = FileFieldWithRestrictAccess(verbose_name='JSON pattern file', upload_to=settings.TEMPLADO_REPORT_TEMPLATE_DIR)
+    template = FileFieldWithRestrictAccess(verbose_name='HTML template file', upload_to= functions.get_absolute_directory(settings.TEMPLADO_REPORT_TEMPLATE_DIR))
+    pattern = FileFieldWithRestrictAccess(verbose_name='JSON pattern file', upload_to= functions.get_absolute_directory(settings.TEMPLADO_REPORT_TEMPLATE_DIR))
     tags = models.CharField(max_length=256, verbose_name='Tags')
     title_pattern = models.CharField(max_length=128, verbose_name='Pattern for title')
     tags_pattern = models.CharField(max_length=128, verbose_name='Pattern for tags')
@@ -63,7 +64,7 @@ class ReportManager(models.Manager):
     def create_report(self, template, data, tags=''):
         ''' creates new report and generates pdf based on data from new report
         '''
-        data.update({'STATIC_DIR': settings.TEMPLADO_REPORT_STATIC_DIR})
+        data.update({'STATIC_DIR': functions.get_absolute_directory(settings.TEMPLADO_REPORT_STATIC_DIR)})
         if isinstance(template, int):
             template = str(template)
         if isinstance(template, str):
@@ -83,7 +84,7 @@ class ReportManager(models.Manager):
     def recreate_report(self, report, data={}, tags=''):
         ''' changes attributes of report given new data and generates data
         '''
-        data.update({'STATIC_DIR': settings.TEMPLADO_REPORT_STATIC_DIR})
+        data.update({'STATIC_DIR': functions.get_absolute_directory(settings.TEMPLADO_REPORT_STATIC_DIR)})
         report = self.as_obj(report)
         if data:
             data.update(data)
@@ -116,7 +117,7 @@ class Report(models.Model):
     template = models.ForeignKey(ReportTemplate, verbose_name='Template for report')
     name = models.CharField(null=True, blank=True, max_length=128, verbose_name='Title of report')
     content = models.TextField(null=True, blank=True, verbose_name='JSON content for generating PDF')
-    file = models.FileField(null=True, blank=True, verbose_name='Generated PDF file', upload_to=settings.TEMPLADO_REPORT_FILES_DIR)
+    file = models.FileField(null=True, blank=True, verbose_name='Generated PDF file', upload_to=functions.get_absolute_directory(settings.TEMPLADO_REPORT_FILES_DIR))
     started = models.DateTimeField(default=None, null=True, blank=True, verbose_name='Start date of generating file')
     finished = models.DateTimeField(default=None, null=True, blank=True, verbose_name='Finish date of generating file')
     tags = models.CharField(null=True, blank=True, max_length=128, verbose_name='Tags for report')

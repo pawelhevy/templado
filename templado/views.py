@@ -10,6 +10,7 @@ from models import Report, ReportTemplate
 from .modelforms import ReportTemplateForm
 from templado.forms import UploadStaticForm
 from templado.functions import save_static_file, get_uploaded_static_files
+from templado import functions
 
 
 class ReportsListView(ListView):
@@ -129,7 +130,7 @@ class DownloadTemplate(View):
 
     def get(self, request, *args, **kwargs):
         fileName = kwargs['filename']
-        url = os.path.join(settings.TEMPLADO_REPORT_TEMPLATE_DIR, fileName)
+        url = os.path.join(functions.get_absolute_directory(settings.TEMPLADO_REPORT_TEMPLATE_DIR), fileName)
         wrapper = FileWrapper(file(url))
         response = HttpResponse(wrapper, content_type='text/plain')
         response['Content-Disposition'] = 'attachment; filename=%s' % os.path.basename(fileName)

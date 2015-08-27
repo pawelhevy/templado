@@ -31,14 +31,14 @@ Quick start
         'django.core.context_processors.request',
     )
 
-    from django.conf import settings
     '''
-    set different media folder
-    MEDIA_URL = 'custom_media_folder/'
+    	set root folder on disk where files will be uploaded
+    	MEDIA_ROOT = '/media/DjangoApp/'
     '''
-    TEMPLADO_REPORT_STATIC_DIR = os.path.join(settings.MEDIA_URL, 'report-static')
-    TEMPLADO_REPORT_TEMPLATE_DIR = os.path.join(settings.MEDIA_URL, 'report-templates')
-    TEMPLADO_REPORT_FILES_DIR = os.path.join(settings.MEDIA_URL, 'report-files') 'media'), 'report-static')
+    TEMPLADO_REPORT_STATIC_DIR   = 'templado/static'
+    TEMPLADO_REPORT_TEMPLATE_DIR = 'templado/templates'
+    TEMPLADO_REPORT_FILES_DIR    = 'templado/reports'
+    #with this config the files will go to {MEDIA_ROOT}/templado
 
 3. Include the templado URLconf in your project urls.py like this::
 
